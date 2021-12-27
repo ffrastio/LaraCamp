@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/success-checkout', [CheckoutController::class, 'success'])->name('success-checkout');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
