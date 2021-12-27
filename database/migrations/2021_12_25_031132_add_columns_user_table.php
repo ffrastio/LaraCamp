@@ -15,8 +15,8 @@ class AddColumnsUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('avatar')->after('password');
-            $table->string('occupation')->after('password');
+            $table->string('avatar')->nullable()->after('password');
+            $table->string('occupation')->nullable()->after('password');
             $table->boolean('is_admin')->default(false)->after('password');
             $table->softDeletes();
         });
