@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-Route::get('/success-checkout', [CheckoutController::class, 'success'])->name('success-checkout');
+Route::get('/success-checkout', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/{camp:slug}', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store');
+
 Route::get('/login', [UserController::class, 'login'])->name('login');
 
 // Configuration Socialite
