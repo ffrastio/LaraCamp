@@ -26,6 +26,7 @@
                     </h2>
                 </div>
             </div>
+            @include('components.alert')
             <div class="row my-5 table-responsive">
                 <table class="table text-center ">
                     <thead>
