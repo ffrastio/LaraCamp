@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\Checkout\Store;
 use App\Models\Camps;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(Request $request, Camps $camp)
+    public function store(Store $request, Camps $camp)
     {
         $data = $request->all();
 
