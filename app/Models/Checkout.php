@@ -29,5 +29,15 @@ class Checkout extends Model
         return $this->belongsTo(Camps::class, 'camps_id', 'id');
     }
 
+    /**
+     * Get the User that owns the Checkout
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
     protected $hidden = [];
 }

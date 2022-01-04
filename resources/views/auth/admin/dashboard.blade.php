@@ -41,6 +41,9 @@
                                 Price
                             </th>
                             <th>
+                                User
+                            </th>
+                            <th>
                                 Status
                             </th>
                             <th>
@@ -64,6 +67,9 @@
                                 </td>
                                 <td>
                                     <strong>${{ $item->Camp->price }}K</strong>
+                                </td>
+                                <td>
+                                    <strong class="text-uppercase">{{ $item->User->name }}</strong>
                                 </td>
                                 <td>
                                     @if ($item->is_paid)
