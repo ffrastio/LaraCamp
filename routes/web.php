@@ -3,6 +3,8 @@
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\DashboardController as UserDashboard;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +32,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/success-checkout', [CheckoutController::class, 'success'])->name('checkout.success');
     Route::get('/checkout/{camp:slug}', [CheckoutController::class, 'index'])->name('checkout');
     Route::post('/checkout/{camp}', [CheckoutController::class, 'store'])->name('checkout.store');
+    //dashboard
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+    // user Dashboard
+    Route::prefix('user/dashboard')->namespace('User')->name('user.')->group(function () {
+        Route::get('/', [UserDashboard::class, 'index'])->name('dashboard');
+    });
+
+    // admin Dashboard
+    Route::prefix('admin/dashboard')->namespace('Admin')->name('admin.')->group(function () {
+        Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
+    });
 });
 
 // Route::get('/dashboard', function () {
