@@ -14,84 +14,70 @@
 
     @include('includes.navbar')
 
-    <section class="dashboard my-5">
-        <div class="container">
-            <div class="row text-left">
-                <div class=" col-lg-12 col-12 header-wrap mt-4">
-                    <p class="story">
-                        DASHBOARD
-                    </p>
-                    <h2 class="primary-header ">
-                        My Bootcamps
-                    </h2>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="card">
+                    <div class="card-header">
+                        My Camps
+                    </div>
+                    <div class="card-body">
+                        @include('components.alert')
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Camp</th>
+                                    <th>Price</th>
+                                    <th>Register Data</th>
+                                    <th>Paid Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($checkouts as $item)
+                                    <tr>
+                                        <td>
+                                            {{ $item->User->name }}
+                                        </td>
+                                        <td>
+                                            {{ $item->Camp->title }}
+                                        </td>
+                                        <td>
+                                            {{ $item->Camp->price }}K
+                                        </td>
+                                        <td>
+                                            {{ $item->created_at->format('M - d - y') }}
+                                        </td>
+                                        <td>
+                                            @if ($item->is_paid)
+                                                <span class="badge bg-success">Paid</span>
+                                            @else
+                                                <span class="badge bg-warning">Waiting</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (!$item->is_paid)
+                                                <form action="{{ route('admin.checkout.update', $item->id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <button class="btn btn-primary btn-sm">Set to Paid</button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3">No Camps Registered</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            @include('components.alert')
-            <div class="row my-5 table-responsive">
-                <table class="table text-center ">
-                    <thead>
-                        <tr>
-                            <th>
-                                Picture
-                            </th>
-                            <th>
-                                Camps Name
-                            </th>
-                            <th>
-                                Price
-                            </th>
-                            <th>
-                                User
-                            </th>
-                            <th>
-                                Status
-                            </th>
-                            <th>
-                                Service
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($checkouts as $item)
-                            <tr class="align-middle">
-                                <td width="18%">
-                                    <img src="{{ url('assets/images/item_bootcamp.png') }}" height="120" alt="">
-                                </td>
-                                <td>
-                                    <p class="mb-2">
-                                        <strong>{{ $item->Camp->title }}</strong>
-                                    </p>
-                                    <p>
-                                        {{ $item->created_at->format('M d, Y') }}
-                                    </p>
-                                </td>
-                                <td>
-                                    <strong>${{ $item->Camp->price }}K</strong>
-                                </td>
-                                <td>
-                                    <strong class="text-uppercase">{{ $item->User->name }}</strong>
-                                </td>
-                                <td>
-                                    @if ($item->is_paid)
-                                        <Strong class="text-success">Payment Success</Strong>
-                                    @else
-                                        <Strong>Waiting for Payment</Strong>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-primary">
-                                        Contact Support
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <td colspan="5">No Data Camp</td>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </section>
+    </div>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
