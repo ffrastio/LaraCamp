@@ -69,7 +69,8 @@
                                     @if ($item->is_paid)
                                         <Strong class="text-success">Payment Success</Strong>
                                     @else
-                                        <Strong>Waiting for Payment</Strong>
+                                        <Strong>Waiting for Payment</Strong> <br>
+                                        <a href="{{$item->midtrans_url}}" class="btn btn-primary">Pay Now</a>
                                     @endif
                                 </td>
                                 <td>
